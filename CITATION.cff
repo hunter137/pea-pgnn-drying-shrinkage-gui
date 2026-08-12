@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this desktop research software, please cite the software repository."
+type: software
+title: "PEA-PGNN Drying-Shrinkage Prediction GUI"
+abstract: >-
+  A Windows desktop research application for checksummed PEA-PGNN concrete
+  drying-shrinkage prediction, reference-equation comparison, protected custom
+  formula editing, numerical trial calculation, batch prediction, and
+  deterministic PDF calculation reports.
+authors:
+  - family-names: Liang
+    given-names: Deyu
+    affiliation: "School of Transportation and Surveying Engineering, Shenyang Jianzhu University, Shenyang, China"
+    orcid: "https://orcid.org/0009-0004-4042-8826"
+    website: "https://github.com/hunter137"
+  - family-names: Liu
+    given-names: Jinlong
+    affiliation: "School of Civil Engineering, Southeast University, Nanjing, China"
+  - family-names: Xu
+    given-names: Lei
+    affiliation: "Laboratory of Construction Materials, EPFL, Lausanne, Switzerland"
+repository-code: "https://github.com/hunter137/pea-pgnn-drying-shrinkage-gui"
+url: "https://github.com/hunter137/pea-pgnn-drying-shrinkage-gui"
+license: MIT
+version: 1.0.0
+date-released: 2026-08-12
+keywords:
+  - concrete drying shrinkage
+  - engineering desktop software
+  - physics-embedded neural network
+  - formula editor
+  - scientific machine learning
+

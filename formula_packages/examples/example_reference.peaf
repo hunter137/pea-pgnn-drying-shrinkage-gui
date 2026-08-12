@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "id": "example_reference",
+  "name": "Example reference",
+  "description": "Example user-defined drying-shrinkage comparison curve.",
+  "expression": "eps_u*(1-(RH/100)**3)*sqrt(t/(t+size_factor*VtoS**2))",
+  "latex": "\\varepsilon_{\\mathrm{sh}}(t)=\\varepsilon_{\\mathrm{u}}[1-(RH/100)^3]\\sqrt{t/[t+k(V/S)^2]}",
+  "constants": {
+    "eps_u": 1000.0,
+    "size_factor": 0.15
+  },
+  "color": "#8B5E3C",
+  "line_style": "--",
+  "enabled": true
+}
+

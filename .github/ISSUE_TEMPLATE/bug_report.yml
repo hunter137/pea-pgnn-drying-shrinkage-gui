@@ -1,0 +1,43 @@
+name: Bug report
+description: Report a reproducible software, formula, export, or interface problem
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Do not upload private datasets, unpublished manuscripts, or credentials.
+  - type: input
+    id: version
+    attributes:
+      label: Software version
+      placeholder: 1.0.0
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Windows, Python, PyTorch, and device
+      placeholder: Windows 11, Python 3.10, PyTorch 2.4.1 CPU
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Give the smallest reproducible sequence and sanitized inputs.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Data check
+      options:
+        - label: I removed private research data, credentials, and unpublished material.
+          required: true
+

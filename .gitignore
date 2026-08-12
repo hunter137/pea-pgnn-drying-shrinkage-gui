@@ -1,0 +1,53 @@
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+.env
+.env.*
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local QA and generated output
+tmp/
+output/
+build/
+dist/
+*.egg-info/
+
+# Private research data, frozen splits, and retraining intermediates
+data/
+datasets/
+runs/
+artifacts/audit/
+artifacts/deployment/logs/
+*.csv
+*.csv.gz
+*.xlsx
+*.xls
+*.parquet
+*.h5
+*.hdf5
+
+# The three checksummed deployment members below are intentionally versioned.
+*.pt
+*.pth
+*.ckpt
+!artifacts/deployment/models/seed_42.pt
+!artifacts/deployment/models/seed_123.pt
+!artifacts/deployment/models/seed_456.pt
+
+# Local user formulas are stored under LOCALAPPDATA, not in the repository.
+formula_packages/custom/*
+!formula_packages/custom/.gitkeep
+

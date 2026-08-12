@@ -1,0 +1,65 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: windows-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.8"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install pypdf==5.1.0
+
+      - name: Verify deployment manifest
+        shell: pwsh
+        run: |
+          @'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, str(Path.cwd() / "src"))
+          from pea_pgnn.artifacts import read_json, validate_manifest_files
+          root = Path("artifacts/deployment")
+          validate_manifest_files(root, read_json(root / "manifest.json"))
+          print("Deployment hashes verified")
+          '@ | python -
+
+      - name: Run unit tests
+        shell: pwsh
+        run: |
+          $output = python -m unittest discover -s tests -v 2>&1
+          $output | Write-Output
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $summary = $output -join "`n"
+          if ($summary -notmatch "Ran 36 tests") {
+            throw "Expected the 36-test public suite to be discovered."
+          }
+          if ($summary -notmatch "OK \(skipped=2\)") {
+            throw "Expected only the two private-data tests to be skipped."
+          }
+
+      - name: Run GUI smoke test
+        run: python run_gui.py --smoke
+
+      - name: Generate sample reports
+        run: python scripts/generate_sample_report.py

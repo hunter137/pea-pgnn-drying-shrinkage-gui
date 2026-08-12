@@ -1,0 +1,173 @@
+{
+  "project_name": "PEA-PGNN Research Software",
+  "model_version": "1.0.0",
+  "created_at": "2026-08-12 17:40:55",
+  "role": "deployment_ensemble_fit_on_all_development_records",
+  "independent_test_claim": false,
+  "cutoff_days": 365,
+  "n_development_records": 7492,
+  "ensemble_seeds": [
+    42,
+    123,
+    456
+  ],
+  "parameter_count_per_member": 104200,
+  "architecture": {
+    "hidden": [
+      256,
+      128,
+      64
+    ],
+    "dropout": 0.03,
+    "delta_eps_range": [
+      -0.5,
+      1.2
+    ],
+    "delta_tau_range": [
+      -0.8,
+      2.0
+    ],
+    "additive_scale": 200.0,
+    "eps_min": 100.0,
+    "eps_max": 1500.0,
+    "tau_min": 5.0,
+    "tau_max": 1000.0
+  },
+  "feature_schema": {
+    "version": "frozen-8729-v1",
+    "names": [
+      "t0",
+      "RH",
+      "T",
+      "h0",
+      "VtoS",
+      "ks",
+      "wb",
+      "fc28",
+      "cement",
+      "water",
+      "ct1",
+      "ct2",
+      "ct3",
+      "at1",
+      "at2",
+      "at3",
+      "at4",
+      "at5",
+      "at6",
+      "at7",
+      "cure1",
+      "cure2",
+      "cure3",
+      "cure4",
+      "cure5",
+      "cure6",
+      "cure7",
+      "hum_f",
+      "fc_s",
+      "vs2",
+      "einf_b3",
+      "einf_gl",
+      "einf_aci",
+      "tau_b3",
+      "einf_avg",
+      "agg",
+      "Ec28",
+      "wc",
+      "paste_vol"
+    ]
+  },
+  "training": {
+    "fixed_epochs_selected_from_strict_audit": 268,
+    "members": [
+      {
+        "seed": 42,
+        "fixed_epochs": 268,
+        "training_monitor_loss": 0.014228049665689468,
+        "elapsed_seconds": 5.8073484897613525
+      },
+      {
+        "seed": 123,
+        "fixed_epochs": 268,
+        "training_monitor_loss": 0.014569723047316074,
+        "elapsed_seconds": 5.692099094390869
+      },
+      {
+        "seed": 456,
+        "fixed_epochs": 268,
+        "training_monitor_loss": 0.014471550472080708,
+        "elapsed_seconds": 5.655639171600342
+      }
+    ]
+  },
+  "strict_audit_evidence": {
+    "N": 1237,
+    "RMSE": 66.18085286524398,
+    "MAE": 54.666414572294045,
+    "bias": -15.980750165589317,
+    "R2": 0.5036793300010785,
+    "condition_macro_RMSE": 63.41809053990973,
+    "n_condition_profiles": 75,
+    "trajectory_macro_RMSE": 56.54064037625873,
+    "n_database_trajectories": 346
+  },
+  "data": {
+    "records": 8729,
+    "condition_profiles": 286,
+    "database_trajectories": 1076,
+    "sha256": "236ec9bc75c5e92f5abb96cef6e3c88e5f329247093482177a3f8ca59d8ea1dc",
+    "frozen_split_sha256": "12b9f8fc13fe7002bfcb418510cb6e65a3e48b8d4676f956adb4dcddc0c345d0"
+  },
+  "uncertainty": {
+    "nominal_prediction_interval_available": false,
+    "ensemble_standard_deviation_meaning": "optimization-seed variation only; not a prediction interval"
+  },
+  "structural_contract": [
+    "non-negative point prediction",
+    "non-decreasing point trajectory",
+    "bounded by corrected magnitude"
+  ],
+  "scope": "Research-use prototype for the frozen OPC population; not a substitute for experiments or code checks.",
+  "max_query_age_days": 4832.92,
+  "hardware": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.8.20 (default, Oct  3 2024, 15:19:54) [MSC v.1929 64 bit (AMD64)]",
+    "cpu_logical_threads_requested": 12,
+    "torch_device": "cuda",
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 4060",
+      "total_memory_bytes": 8585216000,
+      "compute_capability": "8.9"
+    },
+    "versions": {
+      "numpy": "1.24.4",
+      "pandas": "2.0.3",
+      "scikit_learn": "1.3.2",
+      "torch": "2.4.1+cu118",
+      "cuda_runtime": "11.8"
+    }
+  },
+  "files": [
+    {
+      "path": "models/seed_42.pt",
+      "sha256": "d265ba16a5898e4d20353e9792a9d4769b4050f6909ede07af30581f5cb48d02"
+    },
+    {
+      "path": "models/seed_123.pt",
+      "sha256": "ac5a11d13410099fee4f3d88f87a462f429b283df860fe9f6efb4bfb9a9638c8"
+    },
+    {
+      "path": "models/seed_456.pt",
+      "sha256": "c788ae228b1c63fec010e8cc1be051d302be190c7dc9970fe444eaa460645699"
+    },
+    {
+      "path": "preprocessing.json",
+      "sha256": "f9599d10e65532e66bdf1238b30bb6a89214f2b0b6865d6db89242773bedb985"
+    },
+    {
+      "path": "support.json",
+      "sha256": "4ab66cf77d17272b6e31b7bceebef2f40886622e768b95271551d79353d3fdf4"
+    }
+  ],
+  "quick": false
+}
