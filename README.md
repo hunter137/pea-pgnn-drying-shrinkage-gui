@@ -79,6 +79,20 @@ The deployed result at the requested age is a point prediction. The displayed
 ensemble-member standard deviation is optimization-seed dispersion only, not
 a calibrated prediction interval.
 
+## PDF calculation reports
+
+After a successful run, select **Report** to export the calculation currently
+shown in the workbench. The exporter does not rerun the case, change the input
+condition, or alter the model and formula libraries.
+
+The **standard engineering report** records project and document information,
+input quantities and units, the requested-age result, key-age values, comparison
+curves, applicability checks, the formula register, and preparation/review
+fields. The **complete technical report** adds a model-audit appendix containing
+the deployment configuration, ensemble record, validation summary, artifact
+identity, and internal calculation quantities. A traceable report ID is assigned,
+and the saved PDF's SHA-256 digest is written to the application message log.
+
 ## Formula editor and numerical trials
 
 ![Guided formula editor](docs/images/formula-editor.png)
