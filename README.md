@@ -8,20 +8,18 @@
 [![Platform](https://img.shields.io/badge/platform-Windows-0078D4?style=flat-square&logo=windows)](docs/INSTALLATION.md)
 [![Research software](https://img.shields.io/badge/status-research%20software-6B7280?style=flat-square)](MODEL_CARD.md)
 
-A standalone Windows engineering workbench for checksummed PEA-PGNN concrete
-drying-shrinkage prediction, reference-equation comparison, protected custom
-formula editing, numerical trials, batch processing, and deterministic PDF
-calculation reports.
+Windows desktop software for predicting concrete drying shrinkage with the
+bundled PEA-PGNN model. The application compares reference equations, supports
+custom formulas and batch calculations, and exports PDF calculation reports.
 
-This repository is an independent desktop application. It is not merged into
-the reusable [`hunter137/pea-pgnn`](https://github.com/hunter137/pea-pgnn)
-Python-package repository.
+This repository contains the desktop application. The reusable Python package
+is maintained separately at
+[`hunter137/pea-pgnn`](https://github.com/hunter137/pea-pgnn).
 
-> **Research-use boundary:** the software reports point predictions and
-> recorded validation evidence. It is not a design certificate, does not claim
-> a nominal prediction interval, and does not replace experiments, applicable
-> design codes, project-specific verification, or independent engineering
-> judgement.
+> **Scope:** Results are research-use point predictions. V1.0.0 does not provide
+> a calibrated prediction interval or a design certificate. Use applicable
+> design codes, experiments, and project-specific engineering checks when
+> making design decisions.
 
 ![PEA-PGNN engineering workbench](docs/images/workbench.png)
 
@@ -59,53 +57,51 @@ MathType, and retraining notes.
 
 ## Main workflow
 
-1. Enter the material, exposure, curing, geometry, and reporting-age values in
-   the left property sheet. The mouse wheel works over labels, entries, units,
-   and selectors; the shortcuts above the fields jump to each section.
+1. Enter the material, exposure, curing, geometry, and prediction age in
+   the left panel. Use the section buttons or mouse wheel to move through the
+   input groups.
 2. Select **Run** or press **F5**.
-3. Review the calculated curve, exact key-age table, reference differences,
-   input-support result, and model diagnostics.
+3. Review the prediction curve, key-age table, reference comparisons,
+   input-range check, and model diagnostics.
 4. Export the curve, run a batch CSV calculation, or generate a standard or
    technical PDF calculation report.
 
-The deployed result at the requested age is a point prediction. The displayed
-ensemble-member standard deviation is optimization-seed dispersion only, not
-a calibrated prediction interval.
+The PEA-PGNN result at the requested age is a point prediction. The reported
+ensemble-member standard deviation describes variation between optimization
+seeds. It is not a calibrated prediction interval.
 
 ## PDF calculation reports
 
-After a successful run, select **Report** to export the calculation currently
-shown in the workbench. The exporter does not rerun the case, change the input
-condition, or alter the model and formula libraries.
+After running a prediction, select **Report**. The report uses the result shown
+in the workbench and does not run the model again.
 
-The **standard engineering report** records project and document information,
-input quantities and units, the requested-age result, key-age values, comparison
-curves, applicability checks, the formula register, and preparation/review
-fields. The **complete technical report** adds a model-audit appendix containing
-the deployment configuration, ensemble record, validation summary, artifact
-identity, and internal calculation quantities. A traceable report ID is assigned,
-and the saved PDF's SHA-256 digest is written to the application message log.
+The **standard engineering report** includes the input condition, calculated
+results, comparison curves, applicability checks, formula register, and
+preparation/review fields. The **complete technical report** adds deployment
+and validation details. The application assigns a report ID and writes the
+saved PDF's SHA-256 digest to the message log.
 
 ## Formula editor and numerical trials
 
 ![Guided formula editor](docs/images/formula-editor.png)
 
-Built-in B3, GL2000, and ACI 209 formulas are protected and cannot be edited,
-disabled, archived, or removed. Use **Copy as custom** to create an editable
-comparison curve without changing the trained network.
+Built-in B3, GL2000, and ACI 209 formulas are read-only. Select **Copy as
+custom** to create an editable comparison curve without changing the trained
+model.
 
-Normal users can choose a starting form and edit named parameters. Supported
-published notation can be converted locally into a restricted calculation,
-and desktop MathType can be used as an optional visual editor. Arbitrary
-Python, imports, attribute access, files, and shell commands are rejected.
+Choose a template or enter a formula in supported LaTeX, Unicode, or calculator
+notation. Conversion takes place locally, and desktop MathType is available as
+an optional visual editor. The expression parser rejects Python imports,
+attribute access, file operations, and shell commands.
 
 ![Formula trial calculation](docs/images/trial-calculation.png)
 
-Before saving, the trial workbench compares the unsaved formula with PEA-PGNN
-and the native references, evaluates selected ages, checks numerical health,
-and exports the curve. The sensitivity tab changes one quantity at a time; it
-is a screening tool, not global sensitivity analysis or experimental
-validation. See [Formula editing and safety](docs/FORMULA_SAFETY.md).
+Before saving, the trial window compares the formula with PEA-PGNN and the
+built-in reference equations at selected ages. It also checks the calculated
+curve and exports the values. The sensitivity tab varies one quantity at a
+time and is intended for screening, not a global sensitivity analysis or
+experimental validation. See
+[Formula editing and safety](docs/FORMULA_SAFETY.md).
 
 ## Formula-data protection
 
@@ -115,14 +111,13 @@ User formulas are stored outside the source tree under:
 %LOCALAPPDATA%\PEA-PGNN\V1.0.0\FormulaData
 ```
 
-The active library, archive, revision history, and quarantine are separated.
-Archive replaces permanent deletion, initial and pre-edit snapshots support
-recovery, and a damaged package cannot prevent the native formulas or trained
-model from loading.
+Editing a user formula creates a revision snapshot, and removing it moves the
+file to an archive instead of deleting it permanently. Invalid packages are
+quarantined so that they do not prevent the application from loading.
 
-Custom formulas are comparison curves in V1.0.0. Using a different equation as
-an internal neural-network prior requires a revised feature contract, a new
-model version, and retraining.
+In V1.0.0, custom formulas are displayed only as comparison curves. Using a
+custom equation inside the neural network would require a new feature schema,
+model version, and training run.
 
 ## Reproducibility and artifact integrity
 
@@ -130,15 +125,15 @@ At startup, the application verifies every model, preprocessing, and support
 file listed in `artifacts/deployment/manifest.json` against its SHA-256 digest.
 The manifest also records:
 
-- the three ensemble seeds and fixed training epoch count;
-- architecture and frozen feature-schema information;
-- research-population and split identities;
-- recorded independent later-age audit statistics;
+- the ensemble seeds and training epoch count;
+- the model architecture and feature schema;
+- the dataset and split identifiers used for the recorded evaluation;
+- the later-age audit metrics;
 - Python, PyTorch, CUDA, and training-hardware information; and
-- the explicit absence of a nominal prediction interval.
+- whether calibrated prediction intervals are available.
 
-The deployment model is fitted on all development records and is not presented
-as an independent test fit. See [MODEL_CARD.md](MODEL_CARD.md) for intended use,
+The deployment model was fitted using all development records. It is not an
+independent test model. See [MODEL_CARD.md](MODEL_CARD.md) for intended use,
 metrics, limitations, and interpretation.
 
 ## Testing
@@ -150,19 +145,16 @@ python -m unittest discover -s tests -v
 python run_gui.py --smoke
 ```
 
-Dataset-dependent identity and split-leakage tests run when authorized local
-copies of the private frozen research data are placed at the paths configured
-in `configs/training.json`; those two tests are skipped in the public CI. All
-deployment, inference, formula, GUI, and reporting tests run from the public
-repository. GitHub Actions repeats these public checks on every push and pull
-request.
+Two tests for data identity and split leakage require the private research data
+and are skipped in the public CI. All deployment, inference, formula, GUI, and
+reporting tests run from the public repository. GitHub Actions runs these checks
+on every push and pull request.
 
 ## Retraining
 
-The trained deployment artifacts required for inference are included. The raw
-8,729-record research database, frozen condition-disjoint split, audit-fold
-weights, logs, predictions, manuscript files, and user formula data are not
-published in this repository.
+The repository includes the trained artifacts required for inference. It does
+not include the 8,729-record research database, private split files,
+intermediate training outputs, manuscript files, or user formula data.
 
 Authorized researchers can point `configs/training.json` to local copies and
 run:
@@ -183,6 +175,14 @@ Training uses CUDA automatically when available and otherwise uses the CPU.
 - [Citation metadata](CITATION.cff)
 - [Security policy](SECURITY.md)
 - [Contributing](CONTRIBUTING.md)
+
+## Acknowledgments
+
+This work was supported by the National Key R&D Program of China (Grant Nos.
+2024YFC38098 and 2024YFC3809803), the Liaoning Xingliao Talents Program for
+Science and Technology Innovation Team (No. XLYC2404005), and the Technology
+Research and Development Program of Shenyang Science and Technology Bureau
+(Grant No. 24-213-3-33).
 
 ## License and citation
 
