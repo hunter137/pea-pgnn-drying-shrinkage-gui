@@ -25,27 +25,20 @@ Python-package repository.
 
 ![PEA-PGNN engineering workbench](docs/images/workbench.png)
 
-## What is included
+## Features
 
-- a restrained MATLAB/Abaqus-style Windows workbench with menu, project tree,
-  scrollable property sheet, curve viewport, result inspector, diagnostics,
-  messages, and device status;
-- a checksummed three-member PEA-PGNN V1.0.0 deployment ensemble with a frozen
-  39-variable feature contract and 104,200 parameters per member;
-- exact key-age evaluation, reference comparisons with B3, GL2000, and ACI 209,
-  input-support diagnostics, curve CSV export, and row-isolated batch CSV
-  prediction;
-- CPU inference and automatic CUDA use when a compatible PyTorch/CUDA build is
-  available;
-- standard engineering and complete technical PDF calculation reports with
-  document control, formulas, tables, curves, sign-off, and model audit data;
-- a safe formula library with read-only built-ins, custom packages, local
-  history, archive recovery, quarantine, and atomic saves;
-- guided templates, supported LaTeX/Unicode/calculator conversion, optional
-  MathType MathML round trips, instant previews, engineering trial calculation,
-  and one-variable sensitivity screening; and
-- 36 automated tests covering the scientific contract, artifact loading,
-  formula conversion and safety, GUI scrolling, inference, trials, and reports.
+- Windows desktop interface for entering material, exposure, curing, and
+  geometry conditions.
+- Drying-shrinkage curves and key-age predictions from the bundled three-member
+  PEA-PGNN model.
+- Comparison with the B3, GL2000, and ACI 209 reference equations, together
+  with checks against the recorded input ranges.
+- Curve export, batch CSV prediction, and standard or technical PDF calculation
+  reports.
+- Protected built-in equations and a separate user formula library with
+  editing, preview, trial calculation, backup, and recovery.
+- CPU execution with automatic CUDA acceleration when a compatible PyTorch
+  installation is available.
 
 ## Quick start on Windows
 
